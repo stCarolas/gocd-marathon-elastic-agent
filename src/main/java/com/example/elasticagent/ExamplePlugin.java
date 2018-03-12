@@ -17,10 +17,8 @@
 package com.example.elasticagent;
 
 import com.example.elasticagent.executors.*;
-import com.example.elasticagent.requests.CreateAgentRequest;
-import com.example.elasticagent.requests.ProfileValidateRequest;
-import com.example.elasticagent.requests.ShouldAssignWorkRequest;
-import com.example.elasticagent.requests.ValidatePluginSettings;
+import com.example.elasticagent.requests.*;
+import com.example.elasticagent.views.ViewBuilder;
 import com.thoughtworks.go.plugin.api.GoApplicationAccessor;
 import com.thoughtworks.go.plugin.api.GoPlugin;
 import com.thoughtworks.go.plugin.api.GoPluginIdentifier;
@@ -52,7 +50,7 @@ public class ExamplePlugin implements GoPlugin {
             switch (Request.fromString(request.requestName())) {
                 case REQUEST_SHOULD_ASSIGN_WORK:
                     refreshInstances();
-                    return ShouldAssignWorkRequest.fromJSON(request.requestBody()).executor(agentInstances, pluginRequest).execute();
+                    return ShouldAssignWorkRequest.fromJSON(request.requestBody()).executor(agentInstances).execute();
                 case REQUEST_CREATE_AGENT:
                     refreshInstances();
                     return CreateAgentRequest.fromJSON(request.requestBody()).executor(agentInstances, pluginRequest).execute();
@@ -73,6 +71,14 @@ public class ExamplePlugin implements GoPlugin {
                     return new GetPluginConfigurationExecutor().execute();
                 case PLUGIN_SETTINGS_VALIDATE_CONFIGURATION:
                     return ValidatePluginSettings.fromJSON(request.requestBody()).executor().execute();
+                case REQUEST_STATUS_REPORT:
+                    refreshInstances();
+                    return new StatusReportExecutor(pluginRequest, agentInstances, ViewBuilder.instance()).execute();
+                case REQUEST_AGENT_STATUS_REPORT:
+                    refreshInstances();
+                    return AgentStatusReportRequest.fromJSON(request.requestBody()).executor(pluginRequest, agentInstances, ViewBuilder.instance()).execute();
+                case REQUEST_CAPABILITIES:
+                    return new GetCapabilitiesExecutor().execute();
                 default:
                     throw new UnhandledRequestTypeException(request.requestName());
             }

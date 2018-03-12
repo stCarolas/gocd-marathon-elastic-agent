@@ -16,14 +16,14 @@
 
 package com.example.elasticagent;
 
+import com.example.elasticagent.models.ServerInfo;
 import com.thoughtworks.go.plugin.api.GoApplicationAccessor;
 import com.thoughtworks.go.plugin.api.request.DefaultGoApiRequest;
 import com.thoughtworks.go.plugin.api.response.GoApiResponse;
 
 import java.util.Collection;
 
-import static com.example.elasticagent.Constants.API_VERSION;
-import static com.example.elasticagent.Constants.PLUGIN_IDENTIFIER;
+import static com.example.elasticagent.Constants.*;
 
 
 /**
@@ -37,7 +37,7 @@ public class PluginRequest {
     }
 
     public PluginSettings getPluginSettings() throws ServerRequestFailedException {
-        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_GET_PLUGIN_SETTINGS, API_VERSION, PLUGIN_IDENTIFIER);
+        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_GET_PLUGIN_SETTINGS, PLUGIN_SETTINGS_PROCESSOR_API_VERSION, PLUGIN_IDENTIFIER);
         GoApiResponse response = accessor.submit(request);
 
         if (response.responseCode() != 200) {
@@ -47,8 +47,19 @@ public class PluginRequest {
         return PluginSettings.fromJSON(response.responseBody());
     }
 
+    public ServerInfo getServerInfo() throws ServerRequestFailedException {
+        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_INFO, SERVER_INFO_PROCESSOR_API_VERSION, PLUGIN_IDENTIFIER);
+        GoApiResponse response = accessor.submit(request);
+
+        if (response.responseCode() != 200) {
+            throw ServerRequestFailedException.serverInfo(response);
+        }
+
+        return ServerInfo.fromJSON(response.responseBody());
+    }
+
     public Agents listAgents() throws ServerRequestFailedException {
-        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_LIST_AGENTS, API_VERSION, PLUGIN_IDENTIFIER);
+        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_LIST_AGENTS, ELASTIC_PROCESSOR_API_VERSION, PLUGIN_IDENTIFIER);
         GoApiResponse response = accessor.submit(request);
 
         if (response.responseCode() != 200) {
@@ -63,7 +74,7 @@ public class PluginRequest {
             return;
         }
 
-        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_DISABLE_AGENT, API_VERSION, PLUGIN_IDENTIFIER);
+        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_DISABLE_AGENT, ELASTIC_PROCESSOR_API_VERSION, PLUGIN_IDENTIFIER);
         request.setRequestBody(Agent.toJSONArray(toBeDisabled));
 
         GoApiResponse response = accessor.submit(request);
@@ -78,7 +89,7 @@ public class PluginRequest {
             return;
         }
 
-        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_DELETE_AGENT, API_VERSION, PLUGIN_IDENTIFIER);
+        DefaultGoApiRequest request = new DefaultGoApiRequest(Constants.REQUEST_SERVER_DELETE_AGENT, ELASTIC_PROCESSOR_API_VERSION, PLUGIN_IDENTIFIER);
         request.setRequestBody(Agent.toJSONArray(toBeDeleted));
         GoApiResponse response = accessor.submit(request);
 
