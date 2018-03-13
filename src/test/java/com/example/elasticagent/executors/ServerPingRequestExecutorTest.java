@@ -17,6 +17,7 @@
 package com.example.elasticagent.executors;
 
 import com.example.elasticagent.*;
+import com.example.elasticagent.models.JobIdentifier;
 import com.example.elasticagent.requests.CreateAgentRequest;
 import org.joda.time.Period;
 import org.junit.Test;
@@ -80,7 +81,7 @@ public class ServerPingRequestExecutorTest extends BaseTest {
 
         ExampleAgentInstances agentInstances = new ExampleAgentInstances();
         agentInstances.clock = new Clock.TestClock().forward(Period.minutes(11));
-        ExampleInstance container = agentInstances.create(new CreateAgentRequest(null, new HashMap<String, String>(), null), createSettings());
+        ExampleInstance container = agentInstances.create(new CreateAgentRequest(null, new HashMap<String, String>(), null, new JobIdentifier()), createSettings());
 
         ServerPingRequestExecutor serverPingRequestExecutor = new ServerPingRequestExecutor(agentInstances, pluginRequest);
         serverPingRequestExecutor.execute();

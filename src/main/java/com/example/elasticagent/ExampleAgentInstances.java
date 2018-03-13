@@ -16,6 +16,9 @@
 
 package com.example.elasticagent;
 
+import com.example.elasticagent.models.AgentStatusReport;
+import com.example.elasticagent.models.JobIdentifier;
+import com.example.elasticagent.models.StatusReport;
 import com.example.elasticagent.requests.CreateAgentRequest;
 
 import java.util.ArrayList;
@@ -103,6 +106,33 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
     @Override
     public ExampleInstance find(String agentId) {
         return instances.get(agentId);
+    }
+
+    @Override
+    public ExampleInstance find(JobIdentifier jobIdentifier) {
+        // TODO: Implement me!
+//        return instances.values()
+//                .stream()
+//                .filter(x -> x.jobIdentifier().equals(jobIdentifier))
+//                .findFirst()
+//                .orElse(null);
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public StatusReport getStatusReport(PluginSettings pluginSettings) throws Exception {
+        // TODO: Implement me!
+        // TODO: Read status information about agent instances from the cloud provider
+//        return new StatusReport("")
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public AgentStatusReport getAgentStatusReport(PluginSettings pluginSettings, ExampleInstance agentInstance) {
+        // TODO: Implement me!
+        // TODO: Read status information about agent instance from the cloud provider
+//        return new AgentStatusReport(null, null, null)
+        throw new UnsupportedOperationException();
     }
 
     // used by tests

@@ -18,9 +18,10 @@ package com.example.elasticagent.requests;
 
 import com.example.elasticagent.Agent;
 import com.example.elasticagent.AgentInstances;
-import com.example.elasticagent.PluginRequest;
+import com.example.elasticagent.ExampleInstance;
 import com.example.elasticagent.RequestExecutor;
 import com.example.elasticagent.executors.ShouldAssignWorkRequestExecutor;
+import com.example.elasticagent.models.JobIdentifier;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,11 +35,13 @@ public class ShouldAssignWorkRequest {
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     private Agent agent;
     private String environment;
+    private JobIdentifier jobIdentifier;
     private Map<String, String> properties;
 
-    public ShouldAssignWorkRequest(Agent agent, String environment, Map<String, String> properties) {
+    public ShouldAssignWorkRequest(Agent agent, String environment, JobIdentifier jobIdentifier, Map<String, String> properties) {
         this.agent = agent;
         this.environment = environment;
+        this.jobIdentifier = jobIdentifier;
         this.properties = properties;
     }
 
@@ -53,6 +56,10 @@ public class ShouldAssignWorkRequest {
         return environment;
     }
 
+    public JobIdentifier jobIdentifier() {
+        return jobIdentifier;
+    }
+
     public Map<String, String> properties() {
         return properties;
     }
@@ -61,7 +68,7 @@ public class ShouldAssignWorkRequest {
         return GSON.fromJson(json, ShouldAssignWorkRequest.class);
     }
 
-    public RequestExecutor executor(AgentInstances agentInstances, PluginRequest pluginRequest) {
-        return new ShouldAssignWorkRequestExecutor(this, agentInstances, pluginRequest);
+    public RequestExecutor executor(AgentInstances<ExampleInstance> agentInstances) {
+        return new ShouldAssignWorkRequestExecutor(this, agentInstances);
     }
 }

@@ -16,6 +16,9 @@
 
 package com.example.elasticagent;
 
+import com.example.elasticagent.models.AgentStatusReport;
+import com.example.elasticagent.models.JobIdentifier;
+import com.example.elasticagent.models.StatusReport;
 import com.example.elasticagent.requests.CreateAgentRequest;
 
 
@@ -82,5 +85,28 @@ public interface AgentInstances<T> {
      * @param agentId the elastic agent id
      */
     T find(String agentId);
+
+    /**
+     * Finds an agent instance with the specified <code>jobIdentifier</code>
+     * @param jobIdentifier The Job Identifier
+     * @return An agent instance, or <code>null</code> if the agent is not found
+     */
+    T find(JobIdentifier jobIdentifier);
+
+    /**
+     * Get the status report from the agents
+     * @param pluginSettings the plugin settings object
+     * @return A StatusReport object
+     * @throws Exception
+     */
+    StatusReport getStatusReport(PluginSettings pluginSettings) throws Exception;
+
+    /**
+     * Get the status report of an agent instance
+     * @param pluginSettings The plugin settings object
+     * @param agentInstance The agent instance
+     * @return An AgentStatusReport object
+     */
+    AgentStatusReport getAgentStatusReport(PluginSettings pluginSettings, T agentInstance);
 }
 

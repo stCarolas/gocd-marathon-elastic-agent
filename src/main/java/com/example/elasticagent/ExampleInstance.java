@@ -16,6 +16,7 @@
 
 package com.example.elasticagent;
 
+import com.example.elasticagent.models.JobIdentifier;
 import org.joda.time.DateTime;
 
 import java.util.Date;
@@ -25,13 +26,15 @@ public class ExampleInstance {
     private final DateTime createdAt;
     private final Map<String, String> properties;
     private final String environment;
+    private final JobIdentifier jobIdentifier;
     private String name;
 
-    public ExampleInstance(String name, Date createdAt, Map<String, String> properties, String environment) {
+    public ExampleInstance(String name, Date createdAt, Map<String, String> properties, String environment, JobIdentifier jobIdentifier) {
         this.name = name;
         this.createdAt = new DateTime(createdAt);
         this.properties = properties;
         this.environment = environment;
+        this.jobIdentifier = jobIdentifier;
     }
 
     public String name() {
@@ -48,6 +51,10 @@ public class ExampleInstance {
 
     public Map<String, String> properties() {
         return properties;
+    }
+
+    public JobIdentifier jobIdentifier() {
+        return jobIdentifier;
     }
 
     @Override
