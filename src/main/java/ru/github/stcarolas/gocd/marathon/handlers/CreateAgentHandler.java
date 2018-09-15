@@ -4,7 +4,7 @@ import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.DefaultGoPluginApiResponse;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
-public class CreateAgentHandler extends DefaultGoRequestHandler {
+public class CreateAgentHandler extends DefaultGoElasticRequestHandler {
 
 	@Override
 	protected GoPluginApiResponse handleCommand(GoPluginApiRequest request) {

@@ -4,7 +4,7 @@ import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.DefaultGoPluginApiResponse;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
-public class SettingsGetViewHandler extends DefaultGoRequestHandler {
+public class SettingsGetViewHandler extends DefaultGoElasticRequestHandler {
 
 	@Override
 	protected GoPluginApiResponse handleCommand(GoPluginApiRequest request) {

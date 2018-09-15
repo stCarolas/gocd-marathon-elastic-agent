@@ -4,19 +4,25 @@ import com.thoughtworks.go.plugin.api.logging.Logger;
 import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
-abstract public class DefaultGoRequestHandler implements GoRequestHandler {
+abstract public class DefaultGoElasticRequestHandler implements GoRequestHandler {
+    
+    public static final String ELASTIC_AGENT_REQUEST_PREFIX = "cd.go.elastic-agent.";
 
-    private Logger log = Logger.getLoggerFor(DefaultGoRequestHandler.class);
+    private Logger log = Logger.getLoggerFor(DefaultGoElasticRequestHandler.class);
     private String fullCommandString;
     private GoRequestHandler next;
 
-    public DefaultGoRequestHandler(){
+    public DefaultGoElasticRequestHandler(){
         fullCommandString = ELASTIC_AGENT_REQUEST_PREFIX + getCommandName();
     }
 
     abstract protected GoPluginApiResponse handleCommand(GoPluginApiRequest request);
     abstract protected String getCommandName();
-
+    
+    public String getCommandPrefix() {
+        return ELASTIC_AGENT_REQUEST_PREFIX;
+    }
+    
 	@Override
 	public GoPluginApiResponse handle(GoPluginApiRequest request) {
         if (fullCommandString.equals(request.requestName())) {
