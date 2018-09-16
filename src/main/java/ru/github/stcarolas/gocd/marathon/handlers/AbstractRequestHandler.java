@@ -5,23 +5,28 @@ import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
 abstract public class AbstractRequestHandler implements GoRequestHandler {
 
-    private String fullCommandString;
-    private GoRequestHandler next;
-
     abstract protected GoPluginApiResponse handleCommand(GoPluginApiRequest request);
     abstract protected String getCommandName();
+    abstract protected String getCommandPrefix();
+
+    private String fullCommandString;
+    private GoRequestHandler next;
 
     public AbstractRequestHandler(){
         fullCommandString = getCommandPrefix() + getCommandName();
     }
-
+    
 	@Override
 	public GoPluginApiResponse handle(GoPluginApiRequest request) {
         if (fullCommandString.equals(request.requestName())) {
             handleCommand(request);
         }
-        return null;
-    }
+        if (getNext() == null) {
+            throw new NoHandlerException();
+        }
+        return getNext().handle(request);
+	}
+
 
 	@Override
 	public GoRequestHandler getNext() {

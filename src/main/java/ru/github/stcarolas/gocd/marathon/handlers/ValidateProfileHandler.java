@@ -4,7 +4,7 @@ import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.DefaultGoPluginApiResponse;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
-public class ShouldAssingWorkHandler extends DefaultGoElasticRequestHandler {
+public class ValidateProfileHandler extends DefaultGoElasticRequestHandler {
 
 	@Override
 	protected GoPluginApiResponse handleCommand(GoPluginApiRequest request) {
@@ -13,6 +13,8 @@ public class ShouldAssingWorkHandler extends DefaultGoElasticRequestHandler {
 
 	@Override
 	protected String getCommandName() {
-		return "should-assign-work";
+		return "validate-profile";
 	}
+
+    
 } 
