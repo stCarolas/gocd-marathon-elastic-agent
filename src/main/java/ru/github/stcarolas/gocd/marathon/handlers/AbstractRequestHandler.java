@@ -1,9 +1,12 @@
 package ru.github.stcarolas.gocd.marathon.handlers;
 
+import com.thoughtworks.go.plugin.api.logging.Logger;
 import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
 abstract public class AbstractRequestHandler implements GoRequestHandler {
+
+    public static final Logger LOG = Logger.getLoggerFor(AbstractRequestHandler.class);
 
     abstract protected GoPluginApiResponse handleCommand(GoPluginApiRequest request);
     abstract protected String getCommandName();
