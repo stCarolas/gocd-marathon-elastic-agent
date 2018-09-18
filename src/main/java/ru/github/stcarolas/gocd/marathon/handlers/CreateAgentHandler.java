@@ -15,7 +15,7 @@ public class CreateAgentHandler extends DefaultGoElasticRequestHandler {
         CreateAgentRequest request = gson.fromJson(requestJson.requestBody(), CreateAgentRequest.class);
         AgentPool.getInstance().getAgent(
                 request.getEnviroment(), 
-                request.getProperties().get("path")
+                request.getProperties().get("Path")
         );
         return new DefaultGoPluginApiResponse(200);
 	}
