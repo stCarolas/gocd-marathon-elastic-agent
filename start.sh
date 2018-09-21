@@ -7,4 +7,4 @@
 #
 
 
-docker run -d -p8153:8153 -p8154:8154 --net=host -e GOCD_PLUGIN_INSTALL_docker-elastic-agents="http://localhost:8000/Downloads/elastic-agent-skeleton-plugin-0.2-SNAPSHOT.jar" gocd/gocd-server:v18.9.0
+docker run -d -p8153:8153 -p8154:8154 --net=host -e GOCD_PLUGIN_INSTALL_docker-elastic-agents="http://localhost:8000/Downloads/gocd-marathon-elastic-agent-0.0.1.jar" gocd/gocd-server:v18.9.0
