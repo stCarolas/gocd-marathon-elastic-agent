@@ -16,19 +16,19 @@
 
 apply plugin: 'java'
 
-group = 'com.example.elasticagent.template'
-version = '0.2-SNAPSHOT'
+group = 'com.github.stcarolas.gocdmarathonelasticagent'
+version = '0.0.1'
 
 // these values that go into plugin.xml
 // TODO: change these
 project.ext.pluginDesc = [
-    id         : 'com.example.elasticagent.foocloud',
+    id         : 'com.github.stcarolas.gocdmarathonelasticagent',
     version    : project.version,
-    goCdVersion: '18.2.0',
-    name       : 'Example Elastic Agent Plugin',
-    description: 'Some longer description of your plugin goes here',
-    vendorName : 'Acme Corp',
-    vendorUrl  : 'https://github.com/user/repository'
+    goCdVersion: '18.7.0',
+    name       : 'Marathon Elastic Agent Plugin',
+    description: 'Plugin for creating elastic agents from marathon.json in Mesos/Marathon',
+    vendorName : 'stCarolas',
+    vendorUrl  : 'https://github.com/stCarolas'
 ]
 
 // Force 1.7 compatibility to ensure that it works with older JVMs

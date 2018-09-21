@@ -16,8 +16,8 @@
 
 <div class="row">
   <div class="columns medium-4 large-3">
-    <label ng-class="{'is-invalid-label': GOINPUTNAME[Path].$error.server}">Image:<span class="asterix">*</span></label>
-    <input ng-class="{'is-invalid-input': GOINPUTNAME[Path].$error.server}" type="text" ng-model="Path" ng-required="true" placeholder="alpine:latest"/>
+      <label ng-class="{'is-invalid-label': GOINPUTNAME[Path].$error.server}">Path to marathon.json:<span class="asterix">*</span></label>
+    <input ng-class="{'is-invalid-input': GOINPUTNAME[Path].$error.server}" type="text" ng-model="Path" ng-required="true" placeholder="/marathon.json"/>
     <span class="form_error form-error" ng-class="{'is-visible': GOINPUTNAME[Path].$error.server}" ng-show="GOINPUTNAME[Path].$error.server">{{GOINPUTNAME[Path].$error.server}}</span>
   </div>
 </div>

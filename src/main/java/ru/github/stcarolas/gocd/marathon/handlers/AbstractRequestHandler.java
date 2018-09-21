@@ -2,6 +2,7 @@ package ru.github.stcarolas.gocd.marathon.handlers;
 
 import com.thoughtworks.go.plugin.api.logging.Logger;
 import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
+import com.thoughtworks.go.plugin.api.response.DefaultGoPluginApiResponse;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
 abstract public class AbstractRequestHandler implements GoRequestHandler {
@@ -21,24 +22,29 @@ abstract public class AbstractRequestHandler implements GoRequestHandler {
     
 	@Override
 	public GoPluginApiResponse handle(GoPluginApiRequest request) {
+        LOG.info("Handler " + fullCommandString + " cheking " + request.requestName());
         if (fullCommandString.equals(request.requestName())) {
-            handleCommand(request);
+            LOG.info("Handler " + fullCommandString + " handle " + request.requestName());
+            return handleCommand(request);
         }
         if (getNext() == null) {
-            throw new NoHandlerException();
+            LOG.info("No handlers left, " + fullCommandString +  " was last");
+            return DefaultGoPluginApiResponse.error("Dont understand");
         }
+        LOG.info("Handler " + fullCommandString + " delegates " + request.requestName());
         return getNext().handle(request);
 	}
 
 
 	@Override
 	public GoRequestHandler getNext() {
-		return null;
+		return next;
 	}
 
 	@Override
 	public GoRequestHandler setNext(GoRequestHandler next) {
-		return null;
+        this.next = next;
+		return getNext();
 	}
 
 }

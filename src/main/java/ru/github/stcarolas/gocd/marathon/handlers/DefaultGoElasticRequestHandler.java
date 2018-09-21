@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 
 abstract public class DefaultGoElasticRequestHandler extends AbstractRequestHandler  {
 
-    protected final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    protected final Gson gson = new GsonBuilder().create();
     
     public static final String ELASTIC_AGENT_REQUEST_PREFIX = "cd.go.elastic-agent.";
 

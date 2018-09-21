@@ -31,19 +31,20 @@ public class GocdMarathonElasticAgentPlugin implements GoPlugin {
     private GoApplicationAccessor accessor;
 
     public GocdMarathonElasticAgentPlugin() {
-        //chain =  new ShouldAssingWorkHandler()
-            //.setNext(new CreateAgentHandler())
-            //.setNext(new ServerPingHandler())
-            //.setNext(new SettingsGetViewHandler())
-            //.setNext(new GetProfileMetadataHandler())
-            //.setNext(new GetProfileViewHandler())
-            //.setNext(new ValidateProfileHandler())
-            //.setNext(new GetIconHandler())
-            //.setNext(new GetConfigurationHandler())
-            //.setNext(new ValidateConfigurationHandler())
-            //.setNext(new StatusReportHandler())
-            //.setNext(new AgentStatusReportHandler())
-            //.setNext(new GetCapabilitiesHandler());
+        chain =  new ShouldAssingWorkHandler();
+        chain
+            .setNext(new CreateAgentHandler())
+            .setNext(new ServerPingHandler())
+            .setNext(new SettingsGetViewHandler())
+            .setNext(new GetProfileMetadataHandler())
+            .setNext(new GetProfileViewHandler())
+            .setNext(new ValidateProfileHandler())
+            .setNext(new GetIconHandler())
+            .setNext(new GetConfigurationHandler())
+            .setNext(new ValidateConfigurationHandler())
+            .setNext(new StatusReportHandler())
+            .setNext(new AgentStatusReportHandler())
+            .setNext(new GetCapabilitiesHandler());
     }
 
     @Override
