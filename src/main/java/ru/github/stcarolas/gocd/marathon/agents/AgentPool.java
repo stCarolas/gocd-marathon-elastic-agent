@@ -2,9 +2,11 @@ package ru.github.stcarolas.gocd.marathon.agents;
 
 import com.thoughtworks.go.plugin.api.logging.Logger;
 
+import ru.github.stcarolas.gocd.marathon.handlers.AbstractRequestHandler;
+
 public class AgentPool {
-    public static final Logger LOG = Logger.getLoggerFor(AgentPool.class);
     private static final AgentPool pool = new AgentPool();
+    public static final Logger LOG = Logger.getLoggerFor(AbstractRequestHandler.class);
 
     private AgentPool(){}
 
