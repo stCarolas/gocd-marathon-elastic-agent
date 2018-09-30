@@ -1,0 +1,15 @@
+{
+    "id": "/my-app",
+    "networks": [
+          { "mode": "container/bridge" }
+    ],
+    "container": {
+    "type": "DOCKER",
+    "docker": {
+          "image": "docker.moscow.alfaintra.net/gocd-agent-base:0.0.1"
+        }
+    },
+    "instances": 1,
+    "cpus": 0.1,
+    "mem": 64
+}

@@ -22,16 +22,16 @@ abstract public class AbstractRequestHandler implements GoRequestHandler {
     
 	@Override
 	public GoPluginApiResponse handle(GoPluginApiRequest request) {
-        LOG.info("Handler " + fullCommandString + " cheking " + request.requestName());
+        LOG.debug("Handler " + fullCommandString + " cheking " + request.requestName());
         if (fullCommandString.equals(request.requestName())) {
             LOG.info("Handler " + fullCommandString + " handle " + request.requestName());
             return handleCommand(request);
         }
         if (getNext() == null) {
-            LOG.info("No handlers left, " + fullCommandString +  " was last");
+            LOG.debug("No handlers left, " + fullCommandString +  " was last");
             return DefaultGoPluginApiResponse.error("Dont understand");
         }
-        LOG.info("Handler " + fullCommandString + " delegates " + request.requestName());
+        LOG.debug("Handler " + fullCommandString + " delegates " + request.requestName());
         return getNext().handle(request);
 	}
 

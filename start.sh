@@ -18,10 +18,10 @@ else
 fi
 ./gradlew build
 cp -f ./build/libs/gocd-marathon-elastic-agent-0.0.1.jar ~/Downloads/
-sleep 3
-docker rm -f gocd || true
-docker run -d -p8153:8153 -p8154:8154 --net=host \
-    -v /srv/gocd:/godata \
-     --name gocd \
-    -e GOCD_PLUGIN_INSTALL_docker-elastic-agents="http://localhost:8000/Downloads/gocd-marathon-elastic-agent-0.0.1.jar" \
-    gocd/gocd-server:v18.9.0
+#sleep 3
+#docker rm -f gocd || true
+#docker run -d -p8153:8153 -p8154:8154 --net=host \
+    #-v /srv/gocd:/godata \
+     #--name gocd \
+    #-e GOCD_PLUGIN_INSTALL_docker-elastic-agents="http://localhost:8000/Downloads/gocd-marathon-elastic-agent-0.0.1.jar" \
+    #gocd/gocd-server:v18.9.0

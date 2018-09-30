@@ -1,0 +1,18 @@
+{
+    "id": "/gocd-server",
+    "networks": [
+          { "mode": "container/bridge" }
+    ],
+    "container": {
+    "type": "DOCKER",
+    "docker": {
+          "image": "192.168.65.60:5000/gocd-server"
+        }
+    },
+    "portMappings": [
+      { "hostPort": 8153, "containerPort": 8153, "protocol": "tcp"}
+    ],
+    "instances": 1,
+    "cpus": 1,
+    "mem": 4096
+}
